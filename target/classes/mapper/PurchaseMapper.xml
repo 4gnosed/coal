@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guet.gdcoal.dao.PurchaseDao">
+	<resultMap type="Purchase" id="PurchasesResultMap">
+		<id property="purId" column="pur_id" />
+		<result property="userId" column="user_id" />
+		<result property="companyId" column="company_id" />
+		<result property="purStatement" column="statement" />
+		<result property="DocNumber" column="docNumber" />
+		<result property="CreateDate" column="createDate" />
+		<result property="DeadLine" column="deadline" />
+		<result property="deliTimeMin" column="deliTime_min" />
+		<result property="deliTimeMax" column="deliTime_max" />
+		<result property="coal1Id" column="coal1_id" />
+		<result property="coal2Id" column="coal2_id" />
+		<result property="Quantity" column="quantity" />
+		<result property="transId" column="trans_id" />
+		<result property="DeliPlace" column="deliPlace" />
+		<result property="cashId" column="cash_id" />
+		<result property="checkId" column="check_id" />
+		<result property="PriceCeiling" column="priceCeiling" />
+		<result property="PriceBottom" column="priceBottom" />
+		<result property="PriceStatement" column="priceStatement" />
+		<result property="payType" column="pay_type" />
+		<result property="AppPromise" column="appPromise" />
+		<result property="PricePromise" column="pricePromise" />
+		<result property="ReceQnet" column="receQnet" />
+		<result property="ReceSt" column="receSt" />
+		<result property="ReceM" column="receM" />
+		<result property="ReceAar" column="receAar" />
+		<result property="receVarMin" column="receVar_min" />
+		<result property="receVarMax" column="receVar_max" />
+		<result property="AirMad" column="airMad" />
+		<result property="AirSt" column="airSt" />
+		<result property="airVadMin" column="airVad_min" />
+		<result property="airVadMax" column="airVad_max" />
+		<result property="DriedQgr" column="driedQgr" />
+		<result property="DriedSt" column="driedSt" />
+		<result property="driedVadMin" column="driedVad_min" />
+		<result property="driedVadMax" column="driedVad_max" />
+		<result property="purParticleSize" column="particleSize" />
+		<result property="ST" column="ST" />
+		<result property="HGI" column="HGI" />
+		<result property="Remark" column="remark" />
+	</resultMap>
+
+	<insert id="addPurchase" parameterType="Purchase">
+		INSERT INTO
+		purchase_info(pur_id,user_id,company_id,statement,docNumber,createDate,deadline,deliTime_min,deliTime_max,coal1_id,coal2_id,quantity,trans_id,deliPlace,cash_id,check_id,priceCeiling,priceBottom,priceStatement,pay_type,appPromise,pricePromise,receQnet,receSt,receM,receAar,receVar_min,receVar_max,airMad,airSt,airVad_min,airVad_max,driedQgr,driedSt,driedVad_min,driedVad_max,particleSize,ST,HGI,remark)
+		VALUE
+		(#{purId},#{userId},#{companyId},#{Statement},#{DocNumber},#{CreateDate},#{DeadLine},#{deliTimeMin},#{deliTimeMax},#{coal1Id},#{coal2Id},#{Quantity},#{transId},#{DeliPlace},#{cashId},#{checkId},#{PriceCeiling},#{PriceBottom},#{PriceStatement},#{payType},#{AppPromise},#{PricePromise},#{ReceQnet},#{ReceSt},#{ReceM},#{ReceAar},#{receVarMin},#{receVarMax},#{AirMad},#{AirSt},#{airVadMin},#{airVadMax},#{DriedQgr},#{DriedSt},#{driedVadMin},#{driedVadMax},#{ParticleSize},#{ST},#{HGI},#{Remark})
+	</insert>
+
+	<update id="updatePurchase" parameterType="Purchase">
+		UPDATE purchase_info
+		SET statement =
+		#{Statement},docNumber =
+		#{DocNumber},CreateDate =
+		#{CreateDate},deadline =
+		#{DeadLine},deliTime_min =
+		#{deliTimeMin},deliTime_max =
+		#{deliTimeMax},coal1_id =
+		#{coal1Id},coal2_id = #{coal2Id},quantity =
+		#{Quantity},trans_id =
+		#{transId},deliPlace = #{DeliPlace},cash_id =
+		#{cashId},check_id =
+		#{checkId},priceCeiling =
+		#{PriceCeiling},priceBottom =
+		#{PriceBottom},priceStatement =
+		#{PriceStatement},pay_type =
+		#{payType},appPromise =
+		#{AppPromise},pricePromise =
+		#{PricePromise},receQnet =
+		#{ReceQnet},receSt = #{ReceSt},receM =
+		#{ReceM},receAar =
+		#{ReceAar},receVar_min = #{receVarMin},receVar_max
+		=
+		#{receVarMax},airMad = #{AirMad},airSt = #{AirSt},airVad_min =
+		#{airVadMin},airVad_max = #{airVadMax},driedQgr = #{DriedQgr},driedSt
+		= #{DriedSt},driedVad_min = #{driedVadMin},driedVad_max =
+		#{driedVadMax},particleSize = #{ParticleSize},ST = #{ST},HGI =
+		#{HGI},remark = #{Remark}
+		WHERE pur_id = #{purId}
+	</update>
+
+	<select id="queryPurchaseById" resultType="Purchase"
+		parameterType="int">
+		SELECT
+		*
+		FROM purchase_info
+		WHERE pur_id = #{purId}
+	</select>
+
+	<select id="queryAllPurchase" resultType="Purchase">
+		SELECT
+		*
+		FROM
+		purchase_info
+	</select>
+
+	<select id="queryNoDraftPurchase" resultType="Purchase"
+		parameterType="string">
+		SELECT
+		*
+		FROM
+		purchase_info
+		WHERE
+		statement != #{statement}
+	</select>
+
+	<select id="getPurchasesByUserId" parameterType="int"
+		resultType="Purchase">
+		SELECT
+		*
+		FROM purchase_info
+		WHERE user_id = #{userId}
+	</select>
+
+	<update id="updatePurchaseById">
+		UPDATE
+		purchase_info
+		SET
+		statement = #{Statement}
+		WHERE
+		pur_id = #{purId}
+	</update>
+
+	<delete id="deletePurchaseById" parameterType="int">
+		DELETE
+		FROM
+		purchase_info
+		WHERE pur_id = #{purId}
+	</delete>
+
+</mapper>

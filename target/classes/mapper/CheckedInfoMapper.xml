@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须与Dao路径一致 -->
+<mapper namespace="com.guet.gdcoal.dao.CheckedInfoDao">
+	<resultMap type="CheckedInfo" id="CheckedInfoResultMap">
+		<id property="checkId" column="check_id" />
+		<result property="userId" column="user_id" />
+		<result property="purId" column="pur_id" />
+		<result property="time" column="time" />
+		<result property="opinion" column="opinion" />
+		<result property="operate" column="operate" />
+	</resultMap>
+
+	<insert id="addCheckedInfo" parameterType="CheckedInfo">
+		INSERT INTO
+		check_info
+		(user_id,pur_id,time,opinion,operate)
+		VALUES(#{userId},#{purId},#{time},#{opinion},#{operate})
+	</insert>
+
+	<select id="getCheckedInfoByUserId" parameterType="int"
+		resultType="CheckedInfo">
+		SELECT
+		*
+		FROM check_info
+		WHERE
+		user_id=#{userId}
+	</select>
+</mapper>

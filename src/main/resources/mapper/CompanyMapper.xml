@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须与Dao路径一致 -->
+<mapper namespace="com.guet.gdcoal.dao.CompanyDao">
+
+	<resultMap type="Company" id="companyResultMap">
+		<id property="companyId" column="company_id" />
+		<result property="companyName" column="company_name" />
+		<result property="companyLeader" column="company_leader" />
+		<result property="companyPhone" column="company_phone" />
+		<result property="companyAddress" column="company_address" />
+		<result property="companyEmail" column="company_email" />
+	</resultMap>
+
+	<select id="findUserCompany" resultType="Company" parameterType="int">
+		SELECT
+		*
+		FROM company_info
+		WHERE company_id=#{companyId}
+	</select>
+
+	<select id="findAllCompany" resultType="Company">
+		SELECT
+		*
+		FROM
+		company_info
+	</select>
+
+</mapper>
